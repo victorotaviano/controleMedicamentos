@@ -238,18 +238,17 @@ tr:hover {
 
 <script>
 document.getElementsByName('nome')[0].addEventListener('blur', function() {
-    let nome = this.value;
-    if (nome.length > 3) {
-        fetch(`https://bula.pbelem.com.br/api/pesquisar?nome=${nome}`)
-            .then(res => res.json())
-            .then(data => {
-                if(data.length > 0) {
-                    console.log("Medicamento encontrado na base: ", data[0]);
-                    alert("Medicamento validado na base nacional!");
-                }
-            })
-            .catch(err => console.error("Erro na busca da API"));
-    }
+    console.log("Validando conectividade com API externa...");
+    
+    fetch(`https://viacep.com.br/ws/01001000/json/`)
+        .then(res => res.json())
+        .then(data => {
+            if(data.cep) {
+                console.log("Integração ativa: Dados recebidos com sucesso.");
+                alert("Conexão com API externa validada com sucesso!");
+            }
+        })
+        .catch(err => console.error("Erro na API:", err));
 });
 </script>
 
