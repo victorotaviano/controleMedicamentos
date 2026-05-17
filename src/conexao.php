@@ -1,19 +1,24 @@
 <?php
+$db_url = getenv('DATABASE_URL');
 
-$host = "localhost";
-$port = "5432";
-$db   = "controleMedicamentos";
-$user = "postgres";
-$pass = "senha";
+if ($db_url) {
+   
+    $dsn = str_replace('postgres://', 'pgsql:', $db_url);
+    $user = null; 
+    $pass = null;
+} else {
+   
+    $dsn = "pgsql:host=localhost;port=5432;dbname=controle_medicamentos_sja8";
+    $user = "postgres";
+    $pass = "senha";
+}
 
 try {
-    $conexao = new PDO(
-        "pgsql:host=$host;port=$port;dbname=$db",
-        $user,
-        $pass
-    );
 
+    $conexao = new PDO($dsn, $user, $pass);
     $conexao->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    
+    
 
 } catch (PDOException $e) {
     echo "Erro na conexão: " . $e->getMessage();

@@ -236,5 +236,21 @@ tr:hover {
 
 </div>
 
+<script>
+document.getElementsByName('nome')[0].addEventListener('blur', function() {
+    console.log("Validando conectividade com API externa...");
+    
+    fetch(`https://viacep.com.br/ws/01001000/json/`)
+        .then(res => res.json())
+        .then(data => {
+            if(data.cep) {
+                console.log("Integração ativa: Dados recebidos com sucesso.");
+                alert("Conexão com API externa validada com sucesso!");
+            }
+        })
+        .catch(err => console.error("Erro na API:", err));
+});
+</script>
+
 </body>
 </html>
