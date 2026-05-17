@@ -236,5 +236,22 @@ tr:hover {
 
 </div>
 
+<script>
+document.getElementsByName('nome')[0].addEventListener('blur', function() {
+    let nome = this.value;
+    if (nome.length > 3) {
+        fetch(`https://bula.pbelem.com.br/api/pesquisar?nome=${nome}`)
+            .then(res => res.json())
+            .then(data => {
+                if(data.length > 0) {
+                    console.log("Medicamento encontrado na base: ", data[0]);
+                    alert("Medicamento validado na base nacional!");
+                }
+            })
+            .catch(err => console.error("Erro na busca da API"));
+    }
+});
+</script>
+
 </body>
 </html>

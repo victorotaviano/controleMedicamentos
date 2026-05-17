@@ -40,3 +40,14 @@ if (preg_match("/^\d{2}:\d{2}$/", $horario)) {
 }
 
 echo "\nTestes finalizados.";
+
+
+echo "\nTestando conexão com API de Medicamentos...\n";
+$teste_api = file_get_contents("https://bula.pbelem.com.br/api/pesquisar?nome=Dipirona");
+
+if ($teste_api !== false && is_array(json_decode($teste_api, true))) {
+    echo "✔ Teste de Integração OK\n";
+} else {
+    echo "❌ Teste de Integração FALHOU\n";
+    exit(1);
+}
