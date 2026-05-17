@@ -7,7 +7,7 @@ if ($db_url) {
     $user = null;
     $pass = null;
 } else {
-    $dsn = "pgsql:host=localhost;port=5432;dbname=controleMedicamentos";
+    $dsn = "pgsql:host=localhost;port=5432;dbname=controle_medicamentos_sja8";
     $user = "postgres";
     $pass = "senha";
 }
