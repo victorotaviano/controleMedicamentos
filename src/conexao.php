@@ -16,5 +16,9 @@ try {
     $conexao = new PDO($dsn, $user, $pass);
     $conexao->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
-    exit("Erro na conexão: " . $e->getMessage());
+    echo "<h1>Erro de Diagnóstico</h1>";
+    echo "<b>Mensagem:</b> " . $e->getMessage() . "<br>";
+    echo "<b>Drivers instalados no PHP do Render:</b> " . implode(", ", PDO::getAvailableDrivers()) . "<br>";
+    echo "<hr>Se 'pgsql' não estiver na lista acima, o Dockerfile não foi lido.";
+    exit;
 }
